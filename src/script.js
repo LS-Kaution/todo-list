@@ -23,7 +23,6 @@ formContainer.appendChild(inputDateOfTask);
 formContainer.appendChild(buttonCancelForm);
 formContainer.appendChild(buttonSendForm);
 var main = document.querySelector('main');
-var addTask = document.createElement('div');
 //
 var logoTitle = document.querySelector('#logo-title');
 logoTitle === null || logoTitle === void 0 ? void 0 : logoTitle.addEventListener('click', reload);
@@ -39,10 +38,25 @@ buttonCancelForm.addEventListener('click', cancelTask);
 function cancelTask() {
     formContainer.remove();
 }
+buttonSendForm.addEventListener('submit', createTask);
 buttonSendForm.onsubmit = function (ev) {
     ev.preventDefault();
 };
-buttonSendForm.addEventListener('submit', createTask);
 function createTask() {
     formContainer.remove();
+    var addTaskDiv = document.createElement('div');
+    addTaskDiv.setAttribute('class', 'add-task-div');
+    var titleTask = document.createElement('p');
+    var dateTask = document.createElement('input');
+    dateTask.setAttribute('type', 'date');
+    dateTask.setAttribute('name', 'date-of-task-send');
+    var buttonTask = document.createElement('button');
+    buttonTask.setAttribute('type', 'button');
+    buttonTask.textContent = 'Realized';
+    main === null || main === void 0 ? void 0 : main.prepend(addTaskDiv);
+    addTaskDiv.prepend(titleTask);
+    addTaskDiv.appendChild(dateTask);
+    addTaskDiv.appendChild(buttonTask);
+    titleTask.textContent = inputTextNameOfTask.value;
+    dateTask.innerHTML = "".concat(inputDateOfTask.value);
 }

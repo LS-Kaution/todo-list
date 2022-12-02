@@ -32,8 +32,6 @@ formContainer.appendChild(buttonSendForm)
 
 const main = document.querySelector('main')
 
-const addTask = document.createElement('div')
-
 //
 
 const logoTitle = document.querySelector('#logo-title')
@@ -56,13 +54,32 @@ function cancelTask() {
     formContainer.remove()
 }
 
+buttonSendForm.addEventListener('submit', createTask)
 buttonSendForm.onsubmit = (ev) => {
     ev.preventDefault();
 }
 
-buttonSendForm.addEventListener('submit', createTask)
-
 function createTask() {
     formContainer.remove()
-}
 
+    const addTaskDiv = document.createElement('div')
+    addTaskDiv.setAttribute('class', 'add-task-div')
+
+    const titleTask = document.createElement('p')
+
+    const dateTask = document.createElement('input')
+    dateTask.setAttribute('type', 'date')
+    dateTask.setAttribute('name', 'date-of-task-send')
+
+    const buttonTask = document.createElement('button')
+    buttonTask.setAttribute('type', 'button')
+    buttonTask.textContent = 'Realized'
+
+    main?.prepend(addTaskDiv)
+    addTaskDiv.prepend(titleTask)
+    addTaskDiv.appendChild(dateTask)
+    addTaskDiv.appendChild(buttonTask)
+
+    titleTask.textContent = inputTextNameOfTask.value
+    dateTask.innerHTML = `${inputDateOfTask.value}`
+}
